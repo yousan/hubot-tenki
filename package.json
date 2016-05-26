@@ -1,0 +1,39 @@
+{
+  "dependencies": {},
+  "description": "A Hubot script that responds 'World!'",
+  "devDependencies": {
+    "chai": "*",
+    "coffee-script": "1.6.3",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-mocha-test": "~0.7.0",
+    "grunt-release": "~0.6.0",
+    "hubot": "2.x",
+    "matchdep": "~0.1.2",
+    "mocha": "*",
+    "sinon": "*",
+    "sinon-chai": "*"
+  },
+  "gitHead": "e57a6bdce556046456fd4930485174ed8e9dde39",
+  "homepage": "https://github.com/hubot-scripts/hubot-hello-world#readme",
+  "keywords": [
+    "hubot",
+    "hubot-scripts"
+  ],
+  "license": "MIT",
+  "main": "index.coffee",
+  "name": "hubot-hello-world",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "hubot": "2.x"
+  },
+  "readme": "# hubot-hello-world\n\nA Hubot script that responds 'World!'\n\nSee [`src/hello-world.coffee`](src/hello-world.coffee) for full documentation.\n\n## Installation\n\nIn hubot project repo, run:\n\n`npm install hubot-hello-world --save`\n\nThen add **hubot-hello-world** to your `external-scripts.json`:\n\n```json\n[\n  \"hubot-hello-world\"\n]\n```\n\n## Sample Interaction\n\n```\nuser1>> hubot hello\nhubot>> World!\n```\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hubot-scripts/hubot-hello-world.git"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "version": "1.0.0"
+}
