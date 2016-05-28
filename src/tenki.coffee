@@ -25,7 +25,7 @@ module.exports = (robot) ->
 # Day of Month: 1-31
 # Months: 0-11
 # Day of Week: 0-6
-#  new cronJob('45 7 * * * * ', () =>
+  new cronJob('45 7 * * * * ', () =>
 
 #  new cronJob('* * * * * * ', () =>
     envelope = room: "random" # 発言する部屋の名前
@@ -42,7 +42,7 @@ module.exports = (robot) ->
     tenki(robot, envelope, '070030')
     robot.send envelope, '今日も一日元気に過ごしましょう。'
     # console.log msg
-#  ).start()
+  ).start()
 
 tenki = (robot, envelope, city) ->
 
