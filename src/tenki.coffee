@@ -25,29 +25,38 @@ module.exports = (robot) ->
 # Day of Month: 1-31
 # Months: 0-11
 # Day of Week: 0-6
-  new cronJob('45 7 * * * * ', () =>
-    envelope = room: "times_yousan" # 発言する部屋の名前
+#  new cronJob('45 7 * * * * ', () =>
+
+#  new cronJob('* * * * * * ', () =>
+    envelope = room: "random" # 発言する部屋の名前
+    # robot.send envelope, '[http://hoge.com|hoge] yahooo'
+    # robot.emit 'slack.attachment', {room: 'times_yousan', text: '<https://github.com/link/to/a/PR|myrepo #42> fix some broken>'}
 
     # 地点定義表: http://weather.livedoor.com/forecast/rss/primary_area.xml
     # city=160010 : 富山市
     # city=230010 : 愛知県
     # city=070030 : 会津若松
-    request = robot.http('http://weather.livedoor.com/forecast/webservice/json/v1?city=160010')
-    .get()
-    request (err, res, body) ->
-      json = JSON.parse body
-      message = json['link']
-      robot.send envelope, message
-      message = '富山市の今日の天気は「' + json['forecasts'][0]['telop'] + '」'
-      robot.send envelope, message
-      message = '最高気温は ' + json['forecasts'][1]['temperature']['max']['celsius'] + '度、最低気温は ' + json['forecasts'][1]['temperature']['min']['celsius'] + '度です。'
-      robot.send envelope, message
-  ).start()
+    robot.send envelope, 'おはようございます。'
+    tenki(robot, envelope, '160010')
+    tenki(robot, envelope, '230010')
+    tenki(robot, envelope, '070030')
+    robot.send envelope, '今日も一日元気に過ごしましょう。'
+    # console.log msg
+#  ).start()
 
-msg = (city) ->
-  request = robot.http('http://weather.livedoor.com/forecast/webservice/json/v1?city=160010').get()
+tenki = (robot, envelope, city) ->
+
+  request = robot.http('http://weather.livedoor.com/forecast/webservice/json/v1?city='+city).get()
   request (err, res, body) ->
     json = JSON.parse body
-    message = json['link']
-    message += '富山市の今日の天気は「' + json['forecasts'][0]['telop'] + '」'
-    message += '最高気温は ' + json['forecasts'][1]['temperature']['max']['celsius'] + '度、最低気温は ' + json['forecasts'][1]['temperature']['min']['celsius'] + '度です。'
+    # how to make a link at slack
+    # @link https://api.slack.com/docs/formatting#linking_to_urls
+    # #{json['link']}
+    msgs = """
+           #{json['location']['city']}の天気は「#{json['forecasts'][0]['telop']}」最高気温は #{json['forecasts'][1]['temperature']['max']['celsius']}度, 最低気温 #{json['forecasts'][1]['temperature']['min']['celsius']}度です。
+"""
+#    msgs = json['link']
+#    msgs += '富山市の今日の天気は「' + json['forecasts'][0]['telop'] + '」'
+#    msgs += '最高気温は ' + json['forecasts'][1]['temperature']['max']['celsius'] + '度、最低気温は ' + json['forecasts'][1]['temperature']['min']['celsius'] + '度です。'
+#    robot.send envelope, msgs
+    robot.send envelope, msgs
