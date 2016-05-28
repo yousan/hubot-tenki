@@ -19,7 +19,7 @@ cronJob = require("cron").CronJob
 
 
 module.exports = (robot) ->
-  new cron('* * * * * 1-5', () =>
+  new cronJob('* * * * * 1-5', () =>
     envelope = room: "random"
     request = msg.http('http://weather.livedoor.com/forecast/webservice/json/v1?city=160010')
     .get()
