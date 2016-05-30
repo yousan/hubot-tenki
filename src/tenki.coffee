@@ -25,7 +25,7 @@ module.exports = (robot) ->
 # Day of Month: 1-31
 # Months: 0-11
 # Day of Week: 0-6
-  new cronJob('45 7 * * * * ', () =>
+  new cronJob('0 45 7 * * * ', () =>
 
 #  new cronJob('* * * * * * ', () =>
     envelope = room: "random" # 発言する部屋の名前
