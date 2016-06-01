@@ -42,6 +42,7 @@ module.exports = (robot) ->
     tenki(robot, envelope, '070030')
     robot.send envelope, '今日も一日元気に過ごしましょう。'
     # console.log msg
+  , null, true, 'Asia/Tokyo'
   ).start()
 
 tenki = (robot, envelope, city) ->
