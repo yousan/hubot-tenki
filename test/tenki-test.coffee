@@ -1,5 +1,7 @@
 Helper = require('hubot-test-helper')
 chai = require 'chai'
+Promise= require 'bluebird'
+#co = require 'co'
 
 expect = chai.expect
 
@@ -26,10 +28,17 @@ describe 'Tenki', ->
         ['hubot', 'hetenki!']
       ]
 
-#  it 'Heard 天気', ->
-#    @room.user.say('alice', '天気').then =>
+  # @link https://github.com/github/hubot/blob/master/docs/scripting.md#making-http-calls
+  # @link https://github.com/mtsmfm/hubot-test-helper
+#  context '天気', ->
+#    beforeEach ->
+#      co =>
+#        @room.user.say 'me', '天気'
+#        hoge = yield new Promise.delay(1000)
+#
+#    it 'heard 天気', ->
 #      expect(@room.messages).to.eql [
-#        ['alice', '天気']
+#        ['me', '天気'],
 #        ['hubot', 'Yo man!']
 #      ]
 
