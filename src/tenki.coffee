@@ -26,8 +26,6 @@ module.exports = (robot) ->
 # Months: 0-11
 # Day of Week: 0-6
   new cronJob('0 45 7 * * * ', () =>
-
-#  new cronJob('* * * * * * ', () =>
     envelope = room: "random" # 発言する部屋の名前
     # robot.send envelope, '[http://hoge.com|hoge] yahooo'
     # robot.emit 'slack.attachment', {room: 'times_yousan', text: '<https://github.com/link/to/a/PR|myrepo #42> fix some broken>'}
@@ -45,8 +43,16 @@ module.exports = (robot) ->
   , null, true, 'Asia/Tokyo'
   ).start()
 
-tenki = (robot, envelope, city) ->
+  robot.respond /Hello/i, (msg) ->
+    msg.reply 'Hello World!'
 
+  robot.hear /天気/i, (msg) ->
+#    console.log(msg.message.user.room)
+    envelope = room: msg.message.user.room
+    envelope = room: 'room1'
+    tenki(robot, envelope, '070030')
+
+tenki = (robot, envelope, city) ->
   request = robot.http('http://weather.livedoor.com/forecast/webservice/json/v1?city='+city).get()
   request (err, res, body) ->
     json = JSON.parse body
@@ -60,4 +66,5 @@ tenki = (robot, envelope, city) ->
 #    msgs += '富山市の今日の天気は「' + json['forecasts'][0]['telop'] + '」'
 #    msgs += '最高気温は ' + json['forecasts'][1]['temperature']['max']['celsius'] + '度、最低気温は ' + json['forecasts'][1]['temperature']['min']['celsius'] + '度です。'
 #    robot.send envelope, msgs
+    console.log('hoge')
     robot.send envelope, msgs
