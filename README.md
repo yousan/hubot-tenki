@@ -1,5 +1,7 @@
 # hubot-hello-tenki
 
+[![Build Status](https://travis-ci.org/yousan/hubot-tenki.svg?branch=master)](https://travis-ci.org/yousan/hubot-tenki)
+
 ## copied from https://github.com/bouzuya/hubot-hello-world/blob/master/package.json
 ## thanks!
 
