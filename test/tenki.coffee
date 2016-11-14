@@ -19,6 +19,13 @@ describe 'Tenki', ->
         ['hubot', '@alice Hello World!']
       ]
 
+  it 'responds to hetenki', ->
+    @room.user.say('alice', '@hubot hetenki').then =>
+      expect(@room.messages).to.eql [
+        ['alice', '@hubot hetenki']
+        ['hubot', '@alice hetenki!']
+      ]
+
   it 'Heard 天気', ->
     @room.user.say('alice', '天気').then =>
       expect(@room.messages).to.eql [

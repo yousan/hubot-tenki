@@ -48,6 +48,9 @@ module.exports = (robot) ->
     envelope = room: 'room1'
     tenki(robot, envelope, '070030')
 
+  robot.hear /hetenki/i, (msg) ->
+    msg.reply 'hetenki!'
+
   robot.hear /天気/i, (msg) ->
 #    console.log(msg.message.user.room)
     envelope = room: msg.message.user.room
