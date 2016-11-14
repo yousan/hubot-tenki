@@ -16,7 +16,7 @@
 #   cron http://qiita.com/mats116/items/0164b37ffaa90f03f2a0
 
 cronJob = require("cron").CronJob
-#moment = require 'moment'
+parseString = require('xml2js').parseString;
 
 module.exports = (robot) ->
 # Seconds: 0-59
@@ -49,10 +49,17 @@ module.exports = (robot) ->
   robot.hear /hetenki/i, (msg) -> # hello world for tenki
     msg.send 'hetenki!'
 
+  robot.hear /xmltest/i, (msg) ->
+    xml = '<root>Salut xml2js!</root>'
+    parseString xml, (err, result) ->
+      msg.send result.root # Salut xml2js!
+
+
   robot.hear /天気/i, (msg) ->
 #    console.log(msg.message.user.room)
     envelope = room: msg.message.user.room
-    tenki(robot, envelope, '070030')
+#    tenki(robot, envelope, '070030')
+
 
 
 tenki = (robot, envelope, city) ->

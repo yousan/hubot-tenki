@@ -28,6 +28,13 @@ describe 'Tenki', ->
         ['hubot', 'hetenki!']
       ]
 
+  it 'responds to xmltest', ->
+    @room.user.say('me', 'xmltest').then =>
+      expect(@room.messages).to.eql [
+        ['me', 'xmltest']
+        ['hubot', 'Salut xml2js!']
+      ]
+
   # @link https://github.com/github/hubot/blob/master/docs/scripting.md#making-http-calls
   # @link https://github.com/mtsmfm/hubot-test-helper
 #  context '天気', ->
