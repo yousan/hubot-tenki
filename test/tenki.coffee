@@ -23,15 +23,15 @@ describe 'Tenki', ->
     @room.user.say('alice', '@hubot hetenki').then =>
       expect(@room.messages).to.eql [
         ['alice', '@hubot hetenki']
-        ['hubot', '@alice hetenki!']
+        ['hubot', 'hetenki!']
       ]
 
-  it 'Heard 天気', ->
-    @room.user.say('alice', '天気').then =>
-      expect(@room.messages).to.eql [
-        ['alice', '天気']
-        ['hubot', 'Yo man!']
-      ]
+#  it 'Heard 天気', ->
+#    @room.user.say('alice', '天気').then =>
+#      expect(@room.messages).to.eql [
+#        ['alice', '天気']
+#        ['hubot', 'Yo man!']
+#      ]
 
 #  it 'responds to she add she ls', ->
 #    @room.user.say('alice', '@hubot she add http://yahoo.co.jp 200').then =>
