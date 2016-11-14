@@ -16,7 +16,7 @@
 #   cron http://qiita.com/mats116/items/0164b37ffaa90f03f2a0
 
 cronJob = require("cron").CronJob
-
+request = require("request").request
 
 module.exports = (robot) ->
 # Seconds: 0-59
@@ -45,6 +45,8 @@ module.exports = (robot) ->
 
   robot.respond /Hello/i, (msg) ->
     msg.reply 'Hello World!'
+    envelope = room: 'room1'
+    tenki(robot, envelope, '070030')
 
   robot.hear /天気/i, (msg) ->
 #    console.log(msg.message.user.room)
@@ -53,8 +55,16 @@ module.exports = (robot) ->
     tenki(robot, envelope, '070030')
 
 tenki = (robot, envelope, city) ->
+#  options = {
+#    url: 'http://weather.livedoor.com/forecast/webservice/json/v1?city='+city
+#  };
+#  request.get(options, (err, res, body) ->
+#    console.log(err, body)
+#  )
+
   request = robot.http('http://weather.livedoor.com/forecast/webservice/json/v1?city='+city).get()
   request (err, res, body) ->
+    console.log(body)
     json = JSON.parse body
     # how to make a link at slack
     # @link https://api.slack.com/docs/formatting#linking_to_urls
@@ -66,5 +76,4 @@ tenki = (robot, envelope, city) ->
 #    msgs += '富山市の今日の天気は「' + json['forecasts'][0]['telop'] + '」'
 #    msgs += '最高気温は ' + json['forecasts'][1]['temperature']['max']['celsius'] + '度、最低気温は ' + json['forecasts'][1]['temperature']['min']['celsius'] + '度です。'
 #    robot.send envelope, msgs
-    console.log('hoge')
     robot.send envelope, msgs

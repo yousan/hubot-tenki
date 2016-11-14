@@ -5,7 +5,7 @@ expect = chai.expect
 
 helper = new Helper('../src/tenki.coffee')
 
-describe 'Nurse', ->
+describe 'Tenki', ->
   beforeEach ->
     @room = helper.createRoom()
 
