@@ -17,6 +17,11 @@
 
 cronJob = require("cron").CronJob
 parseString = require('xml2js').parseString;
+fs = require('fs')
+
+sleep = (ms) ->
+  start = new Date().getTime()
+  continue while new Date().getTime() - start < ms
 
 module.exports = (robot) ->
 # Seconds: 0-59
@@ -50,15 +55,28 @@ module.exports = (robot) ->
     msg.send 'hetenki!'
 
   robot.hear /xmltest/i, (msg) ->
+    # @link https://www.npmjs.com/package/xml2js
     xml = '<root>Salut xml2js!</root>'
     parseString xml, (err, result) ->
-      msg.send result.root # Salut xml2js!
+#      msg.send result.root # Salut xml2js!
 
+    msg.send 'NG?'
+    # @link https://docs.nodejitsu.com/articles/file-system/how-to-read-files-in-nodejs/
+    fs.readFile 'primary_area.xml', 'utf8', (err, data) ->
+      msg.send 'Ok?'
+      if err
+        return console.log(err)
+      parseString data, (err, result) ->
+        channel = result.rss.channel
+        msg.send channel
 
   robot.hear /天気/i, (msg) ->
 #    console.log(msg.message.user.room)
     envelope = room: msg.message.user.room
-#    tenki(robot, envelope, '070030')
+    tenki(robot, envelope, '070030')
+
+
+
 
 
 
@@ -90,3 +108,6 @@ tenki = (robot, envelope, city) ->
     robot.send envelope, "errrororrororo!"
 
   robot.send envelope, 'hoge'
+
+
+

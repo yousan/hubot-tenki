@@ -28,12 +28,12 @@ describe 'Tenki', ->
         ['hubot', 'hetenki!']
       ]
 
-  it 'responds to xmltest', ->
-    @room.user.say('me', 'xmltest').then =>
-      expect(@room.messages).to.eql [
-        ['me', 'xmltest']
-        ['hubot', 'Salut xml2js!']
-      ]
+#  it 'responds to xmltest', ->
+#    @room.user.say('me', 'xmltest').then =>
+#      expect(@room.messages).to.eql [
+#        ['me', 'xmltest']
+#        ['hubot', 'Salut xml2js!']
+#      ]
 
   # @link https://github.com/github/hubot/blob/master/docs/scripting.md#making-http-calls
   # @link https://github.com/mtsmfm/hubot-test-helper
@@ -48,6 +48,34 @@ describe 'Tenki', ->
 #        ['me', '天気'],
 #        ['hubot', 'Yo man!']
 #      ]
+
+#  context 'Sync test', ->
+#    beforeEach ->
+#      co =>
+#        yield @room.user.say 'user1', 'http://gogole.com'
+#        yield new Promise.delay(1000)
+#
+#      it 'expects delayed callback from ok2', ->
+#        console.log @room.messagesexpect(@room.messages).to.eql [
+#          ['user1', 'http://google.com']
+#          ['hubot', 'ok1: http://google.com']
+#          ['hubot', 'ok2: http://google.com']
+#        ]
+
+
+  context 'user says hi to hubot', ->
+    beforeEach ->
+      co =>
+        yield @room.user.say 'alice', '@hubot hi'
+        yield @room.user.say 'bob',   '@hubot hi'
+
+    it 'should reply to user', ->
+      expect(@room.messages).to.eql [
+        ['alice', '@hubot hi']
+        ['hubot', '@alice hi']
+        ['bob',   '@hubot hi']
+        ['hubot', '@bob hi']
+      ]
 
 #  it 'responds to she add she ls', ->
 #    @room.user.say('alice', '@hubot she add http://yahoo.co.jp 200').then =>
