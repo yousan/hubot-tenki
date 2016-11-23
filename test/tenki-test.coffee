@@ -62,12 +62,11 @@ describe 'Tenki', ->
 #          ['hubot', 'ok2: http://google.com']
 #        ]
 
-
   context 'user says hi to hubot', ->
     beforeEach ->
       co =>
         yield @room.user.say 'alice', '@hubot hi'
-        yield @room.user.say 'bob',   '@hubot hi'
+#        yield @room.user.say 'bob',   '@hubot hi'
 
     it 'should reply to user', ->
       expect(@room.messages).to.eql [
