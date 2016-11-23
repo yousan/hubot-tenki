@@ -89,11 +89,8 @@ tenki = (robot, envelope, city) ->
 #  )
 
   try
-    console.log 'nandedamenano?'
-    robot.http("https://example.com")
+    robot.http('http://weather.livedoor.com/forecast/webservice/json/v1?city='+city)
     .get() (err, res, body) ->
-    #robot.http('http://weather.livedoor.com/forecast/webservice/json/v1?city='+city).get() (err, res, body) ->
-      console.log 'e-...?'
       json = JSON.parse body
       # how to make a link at slack
       # @link https://api.slack.com/docs/formatting#linking_to_urls
@@ -102,12 +99,8 @@ tenki = (robot, envelope, city) ->
              #{json['location']['city']}の天気は「#{json['forecasts'][0]['telop']}」最高気温は #{json['forecasts'][1]['temperature']['max']['celsius']}度, 最低気温 #{json['forecasts'][1]['temperature']['min']['celsius']}度です。
   """
       robot.send envelope, msgs
-      robot.send envelope, 'nandedayo!'
   catch error
-    console.log 'u-n'
     robot.send envelope, "errrororrororo!"
-
-  robot.send envelope, 'hoge'
 
 
 
