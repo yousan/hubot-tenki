@@ -31,7 +31,7 @@ module.exports = (robot) ->
 # Months: 0-11
 # Day of Week: 0-6
   new cronJob('0 45 7 * * * ', () =>
-    envelope = room: "random" # 発言する部屋の名前
+    envelope = room: process.env.TENKI_SEND_ROOM # 発言する部屋の名前
     # robot.send envelope, '[http://hoge.com|hoge] yahooo'
     # robot.emit 'slack.attachment', {room: 'times_yousan', text: '<https://github.com/link/to/a/PR|myrepo #42> fix some broken>'}
 
